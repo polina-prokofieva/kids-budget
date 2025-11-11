@@ -2,6 +2,8 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 
+import styles from './SignIn.module.less';
+
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,6 +19,7 @@ export default function SignIn() {
   };
 
   return (
+    <div className={styles.SignIn}>
     <form onSubmit={handleSubmit}>
       <h2>Sign In</h2>
       <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
@@ -24,5 +27,6 @@ export default function SignIn() {
       <button type="submit">Login</button>
       {error && <p style={{ color: "red" }}>{error}</p>}
     </form>
+    </div>
   );
 }
