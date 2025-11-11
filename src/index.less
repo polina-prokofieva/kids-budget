@@ -1,7 +1,8 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Noto Sans", sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  font-size: 20px;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -11,6 +12,15 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --primary-color: #20231a;
+  --secondary-color: #736152;
+  --tertiary-color: #c69f89;
+  --quaternary-color: #81B29A;
+
+  --bg-color: #f2f7f5;
+
+  --error-color: #A53F2B;
 }
 
 a {
@@ -54,10 +64,18 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+input {
+  font-size: 1.2rem;
+  padding: 0.4em 0.8em;
+  line-height: 1em;
+  border-radius: 0.8em;
+  border: 0.12em solid var(--secondary-color);
+}
+
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: var(--primary-color);
+    background-color: var(--bg-color);
   }
   a:hover {
     color: #747bff;

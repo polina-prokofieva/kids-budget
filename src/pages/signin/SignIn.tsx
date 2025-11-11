@@ -20,13 +20,13 @@ export default function SignIn() {
 
   return (
     <div className={styles.SignIn}>
-    <form onSubmit={handleSubmit}>
-      <h2>Sign In</h2>
-      <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
-      <input placeholder="Password" type="password" onChange={e => setPassword(e.target.value)} />
-      <button type="submit">Login</button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-    </form>
+      <form onSubmit={handleSubmit} className={styles.}>
+        <h2>Sign In</h2>
+        <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
+        <input placeholder="Password" type="password" onChange={e => setPassword(e.target.value)} />
+        <button type="submit">Login</button>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+      </form>
     </div>
   );
 }
