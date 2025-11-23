@@ -20,7 +20,7 @@ export default function SignIn() {
 
   return (
     <div className={styles.SignIn}>
-      <form onSubmit={handleSubmit} className={styles.}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <h2>Sign In</h2>
         <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
         <input placeholder="Password" type="password" onChange={e => setPassword(e.target.value)} />
