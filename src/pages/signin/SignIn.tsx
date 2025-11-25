@@ -1,32 +1,41 @@
-import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
+import { useForm, type SubmitHandler } from "react-hook-form";
 
-import styles from './SignIn.module.less';
+type Inputs = {
+  email: string;
+  password: string;
+};
 
-export default function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+const SignIn = () => {
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (err: any) {
-      setError(err.message);
+      console.error(err.message);
     }
   };
 
   return (
-    <div className={styles.SignIn}>
-      <form onSubmit={handleSubmit} className={styles.form}>
+    <div>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <h2>Sign In</h2>
-        <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
-        <input placeholder="Password" type="password" onChange={e => setPassword(e.target.value)} />
+        <input defaultValue="" {...register('email')} />
+        {errors.email && <span>Email is required</span>}
+
+        <input defaultValue="" {...register('password')} type="password" />
+        {errors.password && <span>Password is required</span>}
         <button type="submit">Login</button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
     </div>
   );
-}
+};
+
+export default SignIn;

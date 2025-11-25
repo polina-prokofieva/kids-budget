@@ -1,31 +1,43 @@
-import { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
+import { useForm, type SubmitHandler } from "react-hook-form";
+
+type Inputs = {
+  name: string;
+  email: string;
+  password: string;
+}
 
 export default function SignUp() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit: SubmitHandler<Inputs> = async ({ name, email, password }) => {
     try {
       const userCred = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(userCred.user, { displayName: name });
     } catch (err: any) {
-      setError(err.message);
+      console.error(err.message);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Sign Up</h2>
-      <input placeholder="Name" onChange={e => setName(e.target.value)} />
-      <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
-      <input placeholder="Password" type="password" onChange={e => setPassword(e.target.value)} />
+
+      <input placeholder="Name" defaultValue="" {...register('name')} />
+      {errors.name && <span>Name is required</span>}
+
+      <input placeholder="Email"  defaultValue="" {...register('email')} />
+      {errors.name && <span>Email is required</span>}
+
+      <input placeholder="Password" type="password" defaultValue="" {...register('password')} />
+      {errors.name && <span>Password is required</span>}
+
       <button type="submit">Create Account</button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
     </form>
   );
 }
