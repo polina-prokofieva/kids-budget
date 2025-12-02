@@ -1,6 +1,6 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/firebase";
 import { useForm, type SubmitHandler } from "react-hook-form";
+
+import { useSignInMutation } from "../../store/api/authApi";
 
 type Inputs = {
   email: string;
@@ -15,12 +15,10 @@ const SignIn = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-    } catch (err: any) {
-      console.error(err.message);
-    }
+  const [signIn, {isLoading, error}] = useSignInMutation();
+
+  const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
+    signIn(data);
   };
 
   return (
@@ -32,7 +30,10 @@ const SignIn = () => {
 
         <input defaultValue="" {...register('password')} type="password" />
         {errors.password && <span>Password is required</span>}
-        <button type="submit">Login</button>
+
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? 'Loggin in...' : "Login"}
+        </button>
       </form>
     </div>
   );
