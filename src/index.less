@@ -1,4 +1,5 @@
 @import 'assets/fonts/noto.css';
+@import 'assets/colors.less';
 
 :root {
   --font-main: 'Noto Sans', sans-serif;
@@ -6,17 +7,11 @@
   font-weight: 400;
   font-size: 20px;
 
-  --primary-color: #20231a;
-  --secondary-color: #736152;
-  --tertiary-color: #c69f89;
-  --quaternary-color: #81b29a;
+  background-color: @bg-color;
+}
 
-  --bg-color: #f2f7f5;
-  --error-color: #a53f2b;
-
-  --field-text: #919685;
-
-  background-color: var(--bg-color);
+* {
+  box-sizing: border-box;
 }
 
 a {
@@ -52,7 +47,7 @@ body {
 }
 
 h1 {
-  color: var(--primary-color);
+  color: @primary-color;
   font-size: 3.2em;
   line-height: 1.1;
 }
@@ -61,7 +56,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: var(--bg-color);
+  background-color: @bg-color;
 }
 
 button {
@@ -69,13 +64,14 @@ button {
   padding: 0.4em 1.2em;
   font-size: 1.2em;
   font-weight: 800;
-  color: var(--bg-color);
-  background-color: var(--secondary-color);
+  color: @bg-color;
+  background-color: @secondary-color;
   cursor: pointer;
   transition: border-color 0.25s;
+  transition: background-color 0.2s ease-in-out;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: lighten(@secondary-color, 10%);
 }
 button:focus,
 button:focus-visible {
@@ -83,11 +79,11 @@ button:focus-visible {
 }
 
 input {
-  color: var(--field-text);
+  color: @field-text;
   font-size: 1.2rem;
   padding: 0.4em 0.8em;
   line-height: 1em;
-  border: 0.12em solid var(--secondary-color);
+  border: 0.12em solid @secondary-color;
 }
 
 button, input {
@@ -96,7 +92,7 @@ button, input {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: var(--primary-color);
-    background-color: var(--bg-color);
+    color: @primary-color;
+    background-color: @bg-color;
   }
 }

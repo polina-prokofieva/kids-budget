@@ -6,7 +6,6 @@ import App from './App.tsx';
 import { store } from './store/store.ts';
 import './index.less';
 
-
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
