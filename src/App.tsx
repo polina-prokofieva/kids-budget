@@ -7,6 +7,7 @@ import SignUp from "./pages/signup/SignUp";
 import SignIn from "./pages/signin/SignIn";
 import Profile from "./pages/profile/Profile";
 import { OnboardingPage } from "./pages/onboarding/OnboardingPage";
+import { Loader } from "./pages/components/loader/Loader";
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -20,9 +21,8 @@ export default function App() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
-
 
   return (
     <BrowserRouter>
