@@ -6,13 +6,23 @@ import { auth } from "./firebase/firebase";
 import SignUp from "./pages/signup/SignUp";
 import SignIn from "./pages/signin/SignIn";
 import Profile from "./pages/profile/Profile";
+import { OnboardingPage } from "./pages/onboarding/OnboardingPage";
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    return onAuthStateChanged(auth, (u) => setUser(u));
+    return onAuthStateChanged(auth, (u) => {
+      setUser(u);
+      setLoading(false);
+    });
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
 
   return (
     <BrowserRouter>
@@ -26,6 +36,7 @@ export default function App() {
         ) : (
           <>
             <Route path="/profile" element={<Profile />} />
+            <Route path="/onboarding" element={<OnboardingPage />} />
             <Route path="*" element={<Navigate to="/profile" />} />
           </>
         )}
