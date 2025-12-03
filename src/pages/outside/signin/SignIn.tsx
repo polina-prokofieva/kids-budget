@@ -1,6 +1,6 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 
-import { useSignInMutation } from "../../store/api/authApi";
+import { useSignInMutation } from "../../../store/api/authApi";
 
 type Inputs = {
   email: string;
@@ -15,7 +15,7 @@ const SignIn = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const [signIn, {isLoading, error}] = useSignInMutation();
+  const [signIn, { isLoading, error }] = useSignInMutation();
 
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
     signIn(data);

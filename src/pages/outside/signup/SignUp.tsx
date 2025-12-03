@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useSignUpMutation } from "../../store/api/authApi";
+import { useSignUpMutation } from "../../../store/api/authApi";
 
 type Inputs = {
   name: string;

@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import type { User } from "firebase/auth";
 import { auth } from "./firebase/firebase";
-import SignUp from "./pages/signup/SignUp";
-import SignIn from "./pages/signin/SignIn";
-import Profile from "./pages/profile/Profile";
-import { OnboardingPage } from "./pages/onboarding/OnboardingPage";
-import { Loader } from "./pages/components/loader/Loader";
+import SignUp from "./pages/outside/signup/SignUp";
+import SignIn from "./pages/outside/signin/SignIn";
+import Profile from "./pages/inside/profile/Profile";
+import { OnboardingPage } from "./pages/inside/onboarding/OnboardingPage";
+import { Loader } from "./components/loader/Loader";
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);

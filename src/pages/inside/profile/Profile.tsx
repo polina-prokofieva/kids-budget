@@ -1,4 +1,4 @@
-import { auth } from "../../firebase/firebase";
+import { auth } from "../../../firebase/firebase";
 
 export default function Profile() {
   const user = auth.currentUser;
