@@ -8,11 +8,11 @@ export default function Profile() {
 
   return (
     <LayoutInside title="Profile">
-      <>
+      <section>
         <p>Name: {user.displayName}</p>
         <p>Email: {user.email}</p>
         <button onClick={() => auth.signOut()}>Sign out</button>
-      </>
+      </section>
     </LayoutInside>
   );
 }
