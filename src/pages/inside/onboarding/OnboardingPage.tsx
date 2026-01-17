@@ -9,6 +9,7 @@ import type { CurrencyCode } from "../../../_types/currency";
 type OnboardingInputs = {
   currency: CurrencyCode;
   totalAmount: number;
+  regularMonthlyIncome: number;
 };
 
 export const OnboardingPage = () => {
@@ -40,6 +41,13 @@ export const OnboardingPage = () => {
           name="totalAmount"
           currency={selectedCurrency}
           registerField={register('totalAmount', { valueAsNumber: true })}
+        />
+
+        <label htmlFor="regularMonthlyIncome">How much money do you get each month?</label>
+        <MoneyField
+          name="regularMonthlyIncome"
+          currency={selectedCurrency}
+          registerField={register('regularMonthlyIncome', { valueAsNumber: true })}
         />
 
         <button type="submit">Save</button>
