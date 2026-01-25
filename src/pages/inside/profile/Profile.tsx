@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { auth } from "../../../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
@@ -8,12 +9,14 @@ import { LayoutInside } from "../_layout/LayoutInside";
 import type { UserDoc } from "../../../_types/users";
 
 export default function Profile() {
+  const navigate = useNavigate();
+
   const user = auth.currentUser;
 
   const [userDoc, setUserDoc] = useState<UserDoc | null>(null);
   const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+  useEffect(() => {
     if (!user) return;
 
     const currentUser = user;
@@ -31,6 +34,11 @@ export default function Profile() {
 
     loadUserDoc();
   }, [user]);
+
+  if (!userDoc?.onboardingCompleted) {
+    navigate('/onboarding');
+    return null;
+  }
 
   if (!user) return <p>No user logged in</p>;
   if (loading) return <p>Loading…</p>;
