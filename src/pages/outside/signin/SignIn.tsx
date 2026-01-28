@@ -1,9 +1,10 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 
 import { useSignInMutation } from "../../../store/api/authApi";
 
 import styles from './SignIn.module.less';
+import { FormError } from "../../../_ui/form/error/FormError";
 
 type Inputs = {
   email: string;
@@ -32,10 +33,10 @@ const SignIn = () => {
       <h2>Sign In</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input defaultValue="" {...register('email')} />
-        {errors.email && <span>Email is required</span>}
+        {errors.email && <FormError>Email is required</FormError>}
 
         <input defaultValue="" {...register('password')} type="password" />
-        {errors.password && <span>Password is required</span>}
+        {errors.password && <FormError>Password is required</FormError>}
 
         <button type="submit" disabled={isLoading}>
           {isLoading ? 'Loggin in...' : "Login"}
