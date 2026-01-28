@@ -1,4 +1,8 @@
-import type { UseFormRegister, UseFormWatch } from "react-hook-form";
+import type {
+  FieldErrors,
+  UseFormRegister,
+  UseFormWatch
+} from "react-hook-form";
 import type { CurrencyCode } from "../../../../_types/currency";
 
 export type OnboardingInputs = {
@@ -10,4 +14,5 @@ export type OnboardingInputs = {
 export type OnboardingStepComponentProps = {
   register: UseFormRegister<OnboardingInputs>;
   watch: UseFormWatch<OnboardingInputs>;
+  errors: FieldErrors<OnboardingInputs>;
 };

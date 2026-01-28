@@ -1,7 +1,12 @@
-import { MoneyField } from "../../../../../_ui/fields/money/MoneyField";
+import { FormError } from "../../../../../_ui/form/error/FormError";
+import { MoneyField } from "../../../../../_ui/form/fields/money/MoneyField";
 import type { OnboardingStepComponentProps } from "../../_types/form";
 
-export const TotalAmocnt = ({ register, watch }: OnboardingStepComponentProps) => {
+export const TotalAmocnt = ({
+  register,
+  watch,
+  errors
+}: OnboardingStepComponentProps) => {
   const selectedCurrency = watch('currency');
 
   return (
@@ -14,6 +19,9 @@ export const TotalAmocnt = ({ register, watch }: OnboardingStepComponentProps) =
         currency={selectedCurrency}
         registerField={register('totalAmount', { valueAsNumber: true })}
       />
+      {errors.totalAmount && (
+        <FormError>This field is required</FormError>
+      )}
     </>
   );
 };

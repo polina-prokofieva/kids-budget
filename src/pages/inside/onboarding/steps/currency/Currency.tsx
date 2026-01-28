@@ -1,8 +1,10 @@
 import { CURRENCIES } from "../../../../../_consts/currencies";
+import { FormError } from "../../../../../_ui/form/error/FormError";
 import type { OnboardingStepComponentProps } from "../../_types/form";
 
 export const Currency = ({
-  register
+  register,
+  errors
 }: OnboardingStepComponentProps) => {
   return (
     <>
@@ -18,6 +20,9 @@ export const Currency = ({
           </option>
         ))}
       </select>
+      {errors.currency && (
+        <FormError>This field is required</FormError>
+      )}
     </>
   );
 }

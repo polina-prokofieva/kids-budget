@@ -16,7 +16,10 @@ const SignIn = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    mode: 'onBlur',
+    reValidateMode: 'onChange'
+  });
 
   const [signIn, { isLoading, error }] = useSignInMutation();
 

@@ -12,6 +12,7 @@ export const OnboardingPage = () => {
     register,
     watch,
     handleSubmit,
+    formState: { errors },
   } = useForm<OnboardingInputs>();
 
   const [step, setStep] = useState<number>(0);
@@ -34,12 +35,13 @@ export const OnboardingPage = () => {
   const submit: SubmitHandler<OnboardingInputs> = async (values: OnboardingInputs) => {
     console.log('Form submitted');
     console.log('values', values);
+    console.log('errors', errors);
   };
 
   return (
     <LayoutInside title="Onboarding">
       <form onSubmit={handleSubmit(submit)}>
-        <StepComponent register={register} watch={watch} />
+        <StepComponent register={register} watch={watch} errors={errors} />
 
         <p className={styles.buttons}>
           {!isFirst && <button
