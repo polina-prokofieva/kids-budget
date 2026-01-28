@@ -2,9 +2,10 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 
 import { LayoutInside } from "../_layout/LayoutInside";
 import type { OnboardingInputs } from "./_types/form";
-import { Currency } from "./steps/currency/Currency";
-import { TotalAmocnt } from "./steps/total/TotalAmount";
-import { MonthlyIncome } from "./steps/monthly-income/MonthlyIncome";
+import { useMemo, useState } from "react";
+import { ONBOARDING_STEPS } from "./_consts/steps";
+
+import styles from "./OnboardingPage.module.less";
 
 export const OnboardingPage = () => {
   const {
@@ -13,6 +14,22 @@ export const OnboardingPage = () => {
     handleSubmit,
   } = useForm<OnboardingInputs>();
 
+  const [step, setStep] = useState<number>(0);
+
+  const StepComponent = ONBOARDING_STEPS[step];
+
+  const goToNextStep = () => {
+    if (step < ONBOARDING_STEPS.length - 1)
+      setStep((s) => s + 1);
+  }
+
+  const goToPreviousStep = () => {
+    if (step > 0)
+      setStep((s) => s - 1);
+  }
+
+  const isFirst = useMemo(() => step === 0, [step]);
+  const isLast = useMemo(() => step === ONBOARDING_STEPS.length - 1, [step]);
 
   const submit: SubmitHandler<OnboardingInputs> = async (values: OnboardingInputs) => {
     console.log('Form submitted');
@@ -22,11 +39,23 @@ export const OnboardingPage = () => {
   return (
     <LayoutInside title="Onboarding">
       <form onSubmit={handleSubmit(submit)}>
-        <Currency register={register} watch={watch} />
-        <TotalAmocnt register={register} watch={watch} />
-        <MonthlyIncome register={register} watch={watch} />
+        <StepComponent register={register} watch={watch} />
 
-        <button type="submit">Save</button>
+        <p className={styles.buttons}>
+          {!isFirst && <button
+            type="button"
+            onClick={goToPreviousStep}
+          >
+            Back
+          </button>}
+
+          {isLast ? <button type="submit">Save</button> : <button
+            type="button"
+            onClick={goToNextStep}
+          >
+            Next
+          </button>}
+        </p>
       </form>
     </LayoutInside>
   );
