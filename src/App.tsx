@@ -7,7 +7,7 @@ import SignUp from "./pages/outside/signup/SignUp";
 import SignIn from "./pages/outside/signin/SignIn";
 import Profile from "./pages/inside/profile/Profile";
 import { OnboardingPage } from "./pages/inside/onboarding/OnboardingPage";
-import { Loader } from "./components/loader/Loader";
+import { Loader } from "./_components/loader/Loader";
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);

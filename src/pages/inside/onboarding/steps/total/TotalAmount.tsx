@@ -1,5 +1,5 @@
-import { FormError } from "../../../../../_ui/form/error/FormError";
-import { MoneyField } from "../../../../../_ui/form/fields/money/MoneyField";
+import { FormError } from "@ui/form/error/FormError";
+import { MoneyField } from "@ui/form/fields/money/MoneyField";
 import type { OnboardingStepComponentProps } from "../../_types/form";
 
 export const TotalAmocnt = ({

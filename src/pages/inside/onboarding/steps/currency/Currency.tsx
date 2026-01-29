@@ -1,5 +1,5 @@
-import { CURRENCIES } from "../../../../../_consts/currencies";
-import { FormError } from "../../../../../_ui/form/error/FormError";
+import { CURRENCIES } from "@consts/currencies";
+import { FormError } from "@ui/form/error/FormError";
 import type { OnboardingStepComponentProps } from "../../_types/form";
 
 export const Currency = ({
@@ -16,7 +16,10 @@ export const Currency = ({
       >
         {CURRENCIES.map((currency) => (
           <option key={currency} value={currency}>
-            {currency} — {new Intl.DisplayNames('en', { type: 'currency' }).of(currency)}
+            {currency} — {new Intl.DisplayNames(
+              'en',
+              { type: 'currency' }
+            ).of(currency)}
           </option>
         ))}
       </select>

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { auth } from "../../../firebase/firebase";
+import { auth } from "@fb/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../../firebase/firebase";
+import { db } from "@fb/firebase";
 
 import { LayoutInside } from "../_layout/LayoutInside";
-import type { UserDoc } from "../../../_types/users";
+import type { UserDoc } from "@t/users";
 
 export default function Profile() {
   const navigate = useNavigate();

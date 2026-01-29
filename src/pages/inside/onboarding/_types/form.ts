@@ -1,9 +1,9 @@
+import type { CurrencyCode } from "@t/currency";
 import type {
   FieldErrors,
   UseFormRegister,
   UseFormWatch
 } from "react-hook-form";
-import type { CurrencyCode } from "../../../../_types/currency";
 
 export type OnboardingInputs = {
   currency: CurrencyCode;

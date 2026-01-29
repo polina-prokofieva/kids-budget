@@ -1,10 +1,9 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { Form, Link } from "react-router-dom";
-
-import { useSignInMutation } from "../../../store/api/authApi";
+import { Link } from "react-router-dom";
 
 import styles from './SignIn.module.less';
-import { FormError } from "../../../_ui/form/error/FormError";
+import { FormError } from "@ui/form/error/FormError";
+import { useSignInMutation } from "@store/api/authApi";
 
 type Inputs = {
   email: string;
