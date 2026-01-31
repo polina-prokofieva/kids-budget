@@ -12,6 +12,7 @@ export type OnboardingInputs = {
 };
 
 export type OnboardingStepComponentProps = {
+  name: keyof OnboardingInputs;
   register: UseFormRegister<OnboardingInputs>;
   watch: UseFormWatch<OnboardingInputs>;
   errors: FieldErrors<OnboardingInputs>;

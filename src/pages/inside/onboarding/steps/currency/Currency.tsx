@@ -3,16 +3,17 @@ import { FormError } from "@ui/form/error/FormError";
 import type { OnboardingStepComponentProps } from "../../_types/form";
 
 export const Currency = ({
+  name,
   register,
   errors
 }: OnboardingStepComponentProps) => {
   return (
     <>
-      <label htmlFor="currency">What currency are you using?</label>
+      <label htmlFor={name}>What currency are you using?</label>
       <select
-        id="currency"
+        id={name}
         defaultValue={CURRENCIES[1]}
-        {...register('currency')}
+        {...register(name)}
       >
         {CURRENCIES.map((currency) => (
           <option key={currency} value={currency}>
@@ -23,7 +24,7 @@ export const Currency = ({
           </option>
         ))}
       </select>
-      {errors.currency && (
+      {errors[name] && (
         <FormError>This field is required</FormError>
       )}
     </>

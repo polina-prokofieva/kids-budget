@@ -3,6 +3,7 @@ import { MoneyField } from "@ui/form/fields/money/MoneyField";
 import type { OnboardingStepComponentProps } from "../../_types/form";
 
 export const TotalAmocnt = ({
+  name,
   register,
   watch,
   errors
@@ -11,15 +12,15 @@ export const TotalAmocnt = ({
 
   return (
     <>
-      <label htmlFor="totalAmount">
+      <label htmlFor={name}>
         How much money do you have in general?
       </label>
       <MoneyField
-        name="totalAmount"
+        name={name}
         currency={selectedCurrency}
-        registerField={register('totalAmount', { valueAsNumber: true })}
+        registerField={register(name, { valueAsNumber: true })}
       />
-      {errors.totalAmount && (
+      {errors[name] && (
         <FormError>This field is required</FormError>
       )}
     </>

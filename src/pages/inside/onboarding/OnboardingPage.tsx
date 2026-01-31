@@ -17,7 +17,7 @@ export const OnboardingPage = () => {
 
   const [step, setStep] = useState<number>(0);
 
-  const StepComponent = ONBOARDING_STEPS[step];
+  const StepComponent = ONBOARDING_STEPS[step].component;
 
   const goToNextStep = () => {
     if (step < ONBOARDING_STEPS.length - 1)
@@ -41,7 +41,12 @@ export const OnboardingPage = () => {
   return (
     <LayoutInside title="Onboarding">
       <form onSubmit={handleSubmit(submit)}>
-        <StepComponent register={register} watch={watch} errors={errors} />
+        <StepComponent
+          name={ONBOARDING_STEPS[step].name}
+          register={register}
+          watch={watch}
+          errors={errors}
+        />
 
         <p className={styles.buttons}>
           {!isFirst && <button

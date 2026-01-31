@@ -3,6 +3,7 @@ import { MoneyField } from "@ui/form/fields/money/MoneyField";
 import { FormError } from "@ui/form/error/FormError";
 
 export const MonthlyIncome = ({
+  name,
   register,
   watch,
   errors
@@ -11,21 +12,21 @@ export const MonthlyIncome = ({
 
   return (
     <>
-      <label htmlFor="regularMonthlyIncome">
+      <label htmlFor={name}>
         How much money do you get each month?
       </label>
       <MoneyField
-        name="regularMonthlyIncome"
+        name={name}
         currency={selectedCurrency}
         registerField={register(
-          'regularMonthlyIncome',
+          name,
           {
             valueAsNumber: true,
             required: true,
           }
         )}
       />
-      {errors.regularMonthlyIncome && (
+      {errors[name] && (
         <FormError>This field is required</FormError>
       )}
     </>
