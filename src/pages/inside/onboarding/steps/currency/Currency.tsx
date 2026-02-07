@@ -1,6 +1,6 @@
 import { CURRENCIES } from "@consts/currencies";
-import { FormError } from "@ui/form/error/FormError";
 import type { OnboardingStepComponentProps } from "../../_types/form";
+import { FieldWrapper } from "@ui/form/fields/wrapper/FieldWrapper";
 
 export const Currency = ({
   name,
@@ -8,8 +8,12 @@ export const Currency = ({
   errors
 }: OnboardingStepComponentProps) => {
   return (
-    <>
-      <label htmlFor={name}>What currency are you using?</label>
+    <FieldWrapper
+      fieldName={name}
+      label="What currency are you using?"
+      isError={!!errors[name]}
+      errorMessage='This field is required'
+    >
       <select
         id={name}
         defaultValue={CURRENCIES[1]}
@@ -24,9 +28,6 @@ export const Currency = ({
           </option>
         ))}
       </select>
-      {errors[name] && (
-        <FormError>This field is required</FormError>
-      )}
-    </>
+    </FieldWrapper>
   );
 }

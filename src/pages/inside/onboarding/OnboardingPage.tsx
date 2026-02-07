@@ -1,11 +1,12 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 import { LayoutInside } from "../_layout/LayoutInside";
-import type { OnboardingInputs } from "./_types/form";
+import type { OnboardingValues } from "./_types/form";
 import { useMemo, useState } from "react";
 import { ONBOARDING_STEPS } from "./_consts/steps";
 
 import styles from "./OnboardingPage.module.less";
+import { saveOnboarding } from "./_services/onboarding.service";
 
 export const OnboardingPage = () => {
   const {
@@ -14,7 +15,7 @@ export const OnboardingPage = () => {
     handleSubmit,
     trigger,
     formState: { errors },
-  } = useForm<OnboardingInputs>();
+  } = useForm<OnboardingValues>();
 
   const [step, setStep] = useState<number>(0);
   const [isNextDisabled, setIsNextDisabled] = useState<boolean>(false);
@@ -42,10 +43,8 @@ export const OnboardingPage = () => {
   const isFirst = useMemo(() => step === 0, [step]);
   const isLast = useMemo(() => step === ONBOARDING_STEPS.length - 1, [step]);
 
-  const submit: SubmitHandler<OnboardingInputs> = async (values: OnboardingInputs) => {
-    console.log('Form submitted');
-    console.log('values', values);
-    console.log('errors', errors);
+  const submit: SubmitHandler<OnboardingValues> = async (values: OnboardingValues) => {
+    saveOnboarding(values);
   };
 
   return (

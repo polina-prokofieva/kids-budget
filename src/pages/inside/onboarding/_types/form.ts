@@ -5,15 +5,15 @@ import type {
   UseFormWatch
 } from "react-hook-form";
 
-export type OnboardingInputs = {
+export type OnboardingValues = {
   currency: CurrencyCode;
   totalAmount: number;
   regularMonthlyIncome: number;
 };
 
 export type OnboardingStepComponentProps = {
-  name: keyof OnboardingInputs;
-  register: UseFormRegister<OnboardingInputs>;
-  watch: UseFormWatch<OnboardingInputs>;
-  errors: FieldErrors<OnboardingInputs>;
+  name: keyof OnboardingValues;
+  register: UseFormRegister<OnboardingValues>;
+  watch: UseFormWatch<OnboardingValues>;
+  errors: FieldErrors<OnboardingValues>;
 };

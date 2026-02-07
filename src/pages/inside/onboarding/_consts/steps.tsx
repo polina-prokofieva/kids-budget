@@ -1,14 +1,14 @@
 import type { JSX } from "react";
 import { Currency, MonthlyIncome, TotalAmocnt } from "../steps";
 import type {
-  OnboardingInputs,
+  OnboardingValues,
   OnboardingStepComponentProps
 } from "../_types/form";
 
 type StepComponent = (props: OnboardingStepComponentProps) => JSX.Element;
 
 export const ONBOARDING_STEPS: {
-  name: keyof OnboardingInputs;
+  name: keyof OnboardingValues;
   component: StepComponent;
 }[] = [
   {
