@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { skipToken } from '@reduxjs/toolkit/query';
 
 import { auth } from "@fb/firebase";
 
 import { LayoutInside } from "../_layout/LayoutInside";
 import { useGetUserDocQuery } from "@store/api/authApi";
 import { Loader } from "@components/loader/Loader";
+
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -15,9 +17,7 @@ export default function Profile() {
     data: userDoc,
     isLoading,
     isError,
-  } = useGetUserDocQuery(firebaseUser?.uid!, {
-    skip: !firebaseUser,
-  });
+  } = useGetUserDocQuery(firebaseUser?.uid ?? skipToken);
 
   if (!firebaseUser) {
     navigate("/signin");
@@ -27,6 +27,8 @@ export default function Profile() {
   if (!isLoading && !userDoc?.onboardingCompleted) {
     navigate("/onboarding");
   }
+
+  console.log('userDoc', userDoc);
 
   if (isLoading) return <Loader />
 

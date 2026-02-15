@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { skipToken } from '@reduxjs/toolkit/query';
+
 import { Loader } from "@components/loader/Loader";
 import { LayoutInside } from "../_layout/LayoutInside";
 import { OnboardingForm } from "./form/OnboardingForm";
@@ -14,9 +16,7 @@ export const OnboardingPage = () => {
     data: userDoc,
     isLoading,
     isError,
-  } = useGetUserDocQuery(firebaseUser?.uid!, {
-    skip: !firebaseUser,
-  });
+  } = useGetUserDocQuery(firebaseUser?.uid ?? skipToken);
 
   if (!firebaseUser) {
     navigate("/signin");

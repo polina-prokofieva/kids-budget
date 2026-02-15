@@ -1,5 +1,9 @@
 import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile
+} from "firebase/auth";
 import { auth, db } from "../../firebase/firebase";
 import { FirebaseError } from "firebase/app";
 import type { UserDoc } from "@t/users";
