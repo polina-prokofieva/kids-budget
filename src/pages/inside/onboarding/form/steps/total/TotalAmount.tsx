@@ -1,8 +1,8 @@
+import type { OnboardingStepComponentProps } from "@pages/inside/onboarding/_types/form";
 import { FormError } from "@ui/form/error/FormError";
 import { MoneyField } from "@ui/form/fields/money/MoneyField";
-import type { OnboardingStepComponentProps } from "../../_types/form";
 
-export const TotalAmocnt = ({
+export const TotalAmount = ({
   name,
   register,
   watch,

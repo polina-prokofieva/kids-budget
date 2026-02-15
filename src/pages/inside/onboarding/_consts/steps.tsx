@@ -1,5 +1,5 @@
 import type { JSX } from "react";
-import { Currency, MonthlyIncome, TotalAmocnt } from "../steps";
+import { Currency, MonthlyIncome, TotalAmount } from "../form/steps";
 import type {
   OnboardingValues,
   OnboardingStepComponentProps
@@ -16,7 +16,7 @@ export const ONBOARDING_STEPS: {
     component: Currency,
   }, {
     name: 'totalAmount',
-    component: TotalAmocnt,
+    component: TotalAmount,
   }, {
     name: 'regularMonthlyIncome',
     component: MonthlyIncome,
