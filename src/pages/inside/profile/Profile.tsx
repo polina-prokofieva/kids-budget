@@ -1,12 +1,8 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { auth } from "@fb/firebase";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "@fb/firebase";
 
 import { LayoutInside } from "../_layout/LayoutInside";
-import type { UserDoc } from "@t/users";
 import { useGetUserDocQuery } from "@store/api/authApi";
 import { Loader } from "@components/loader/Loader";
 
