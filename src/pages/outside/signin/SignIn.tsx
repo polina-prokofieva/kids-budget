@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import styles from './SignIn.module.less';
 import { FormError } from "@ui/form/error/FormError";
-import { useSignInMutation } from "@store/api/authApi";
+import { useSignInMutation } from "@store/api/auth";
 
 type Inputs = {
   email: string;

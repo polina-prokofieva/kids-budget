@@ -4,8 +4,8 @@ import { skipToken } from '@reduxjs/toolkit/query';
 import { auth } from "@fb/firebase";
 
 import { LayoutInside } from "../_layout/LayoutInside";
-import { useGetUserDocQuery } from "@store/api/authApi";
 import { Loader } from "@components/loader/Loader";
+import { useGetUserDocQuery } from "@store/api/user";
 
 
 export default function Profile() {

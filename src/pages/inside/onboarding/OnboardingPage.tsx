@@ -4,8 +4,8 @@ import { skipToken } from '@reduxjs/toolkit/query';
 import { Loader } from "@components/loader/Loader";
 import { LayoutInside } from "../_layout/LayoutInside";
 import { OnboardingForm } from "./form/OnboardingForm";
-import { useGetUserDocQuery } from "@store/api/authApi";
 import { auth } from "@fb/firebase";
+import { useGetUserDocQuery } from "@store/api/user";
 
 export const OnboardingPage = () => {
   const navigate = useNavigate();

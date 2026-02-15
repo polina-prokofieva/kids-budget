@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { useSignUpMutation } from "@store/api/authApi";
+import { useSignUpMutation } from "@store/api/auth";
 import { FormError } from "@ui/form/error/FormError";
 
 type Inputs = {
