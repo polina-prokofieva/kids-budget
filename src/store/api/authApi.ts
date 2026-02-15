@@ -55,7 +55,7 @@ export const authApi = createApi({
             return { error: { message: 'User document docs not exist' } }
           }
 
-          return { data: snap.data() }
+          return { data: snap.data() as UserDoc }
         } catch (error) {
           const firebaseError = error as FirebaseError;
 
