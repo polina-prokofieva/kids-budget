@@ -1,7 +1,9 @@
 import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../../firebase/firebase";
+import { auth, db } from "../../firebase/firebase";
 import { FirebaseError } from "firebase/app";
+import type { UserDoc } from "@t/users";
+import { doc, getDoc } from "firebase/firestore";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -23,7 +25,8 @@ export const authApi = createApi({
               message: firebaseError.message,
               code: firebaseError.code,
             },
-          };        }
+          };
+        }
       },
     }),
 
@@ -38,9 +41,34 @@ export const authApi = createApi({
         }
       },
     }),
+
+    getUserDoc: builder.query<UserDoc, string>({
+      async queryFn(uid) {
+        try {
+          const snap = await getDoc(doc(db, 'users', uid));
+
+          if (!snap.exists()) {
+            return { error: { message: 'User document docs not exist' } }
+          }
+
+          return { data: snap.data() }
+        } catch (error) {
+          const firebaseError = error as FirebaseError;
+
+          return {
+            error: {
+              message: firebaseError.message,
+              code: firebaseError.code,
+            }
+          }
+        }
+      }
+    }),
   }),
 });
 
-export const { useSignUpMutation, useSignInMutation } = authApi;
-
-
+export const {
+  useSignUpMutation,
+  useSignInMutation,
+  useGetUserDocQuery
+} = authApi;

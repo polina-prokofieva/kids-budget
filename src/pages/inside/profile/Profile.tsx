@@ -7,47 +7,38 @@ import { db } from "@fb/firebase";
 
 import { LayoutInside } from "../_layout/LayoutInside";
 import type { UserDoc } from "@t/users";
+import { useGetUserDocQuery } from "@store/api/authApi";
+import { Loader } from "@components/loader/Loader";
 
 export default function Profile() {
   const navigate = useNavigate();
 
-  const user = auth.currentUser;
+  const firebaseUser = auth.currentUser;
 
-  const [userDoc, setUserDoc] = useState<UserDoc | null>(null);
-  const [loading, setLoading] = useState(true);
+  const {
+    data: userDoc,
+    isLoading,
+    isError,
+  } = useGetUserDocQuery(firebaseUser?.uid!, {
+    skip: !firebaseUser,
+  });
 
-  useEffect(() => {
-    if (!user) return;
-
-    const currentUser = user;
-
-    async function loadUserDoc() {
-      const ref = doc(db, "users", currentUser.uid);
-      const snap = await getDoc(ref);
-
-      if (snap.exists()) {
-        setUserDoc(snap.data() as UserDoc);
-      }
-
-      setLoading(false);
-    }
-
-    loadUserDoc();
-  }, [user]);
-
-  if (!userDoc?.onboardingCompleted) {
-    navigate('/onboarding');
-    return null;
+  if (!firebaseUser) {
+    navigate("/signin");
+    return;
   }
 
-  if (!user) return <p>No user logged in</p>;
-  if (loading) return <p>Loading…</p>;
+  if (!isLoading && !userDoc?.onboardingCompleted) {
+    navigate("/onboarding");
+  }
+
+  if (isLoading) return <Loader />
 
   return (
     <LayoutInside title="Profile">
       <section>
-        <p>Name: {user.displayName}</p>
-        <p>Email: {user.email}</p>
+        <p>Name: {firebaseUser.displayName}</p>
+        <p>Email: {firebaseUser.email}</p>
 
         {userDoc && (
           <>
