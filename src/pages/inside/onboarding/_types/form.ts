@@ -1,9 +1,9 @@
-import type { CurrencyCode } from "@t/currency";
 import type {
   FieldErrors,
   UseFormRegister,
-  UseFormWatch
-} from "react-hook-form";
+  UseFormWatch,
+} from 'react-hook-form';
+import type { CurrencyCode } from '@t/currency';
 
 export type OnboardingValues = {
   currency: CurrencyCode;

@@ -1,21 +1,28 @@
+import { FirebaseError } from 'firebase/app';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateProfile
-} from "firebase/auth";
-import { auth } from "../../firebase/firebase";
-import { FirebaseError } from "firebase/app";
-import { baseApi } from "./base";
+  updateProfile,
+} from 'firebase/auth';
 
+import { auth } from '../../firebase/firebase';
+import { baseApi } from './base';
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     signUp: builder.mutation({
       async queryFn({ name, email, password }) {
         try {
-          const userCred = await createUserWithEmailAndPassword(auth, email, password);
+          const userCred =
+            await createUserWithEmailAndPassword(
+              auth,
+              email,
+              password,
+            );
 
-          await updateProfile(userCred.user, { displayName: name });
+          await updateProfile(userCred.user, {
+            displayName: name,
+          });
 
           return { data: userCred.user };
         } catch (error) {
@@ -34,20 +41,25 @@ export const authApi = baseApi.injectEndpoints({
     signIn: builder.mutation({
       async queryFn({ email, password }) {
         try {
-          const userCred = await signInWithEmailAndPassword(auth, email, password);
+          const userCred = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password,
+          );
           return { data: userCred.user };
         } catch (error) {
           const firebaseError = error as FirebaseError;
-          return { error: { message: firebaseError.message, code: firebaseError.code } };
+          return {
+            error: {
+              message: firebaseError.message,
+              code: firebaseError.code,
+            },
+          };
         }
       },
     }),
-
-
   }),
 });
 
-export const {
-  useSignUpMutation,
-  useSignInMutation,
-} = authApi;
+export const { useSignUpMutation, useSignInMutation } =
+  authApi;

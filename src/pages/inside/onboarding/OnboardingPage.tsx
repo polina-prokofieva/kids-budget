@@ -1,11 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { Loader } from '@components/loader/Loader';
+import { auth } from '@fb/firebase';
 import { skipToken } from '@reduxjs/toolkit/query';
+import { useGetUserDocQuery } from '@store/api/user';
 
-import { Loader } from "@components/loader/Loader";
-import { LayoutInside } from "../_layout/LayoutInside";
-import { OnboardingForm } from "./form/OnboardingForm";
-import { auth } from "@fb/firebase";
-import { useGetUserDocQuery } from "@store/api/user";
+import { LayoutInside } from '../_layout/LayoutInside';
+import { OnboardingForm } from './form/OnboardingForm';
 
 export const OnboardingPage = () => {
   const navigate = useNavigate();
@@ -19,21 +19,21 @@ export const OnboardingPage = () => {
   } = useGetUserDocQuery(firebaseUser?.uid ?? skipToken);
 
   if (!firebaseUser) {
-    navigate("/signin");
+    navigate('/signin');
     return;
   }
 
   if (!isLoading && userDoc?.onboardingCompleted) {
-    navigate("/profile");
+    navigate('/profile');
   }
 
   console.log('userDoc', userDoc);
 
-  if (isLoading) return <Loader />
+  if (isLoading) return <Loader />;
 
   return (
-    <LayoutInside title="Onboarding">
+    <LayoutInside title='Onboarding'>
       <OnboardingForm />
     </LayoutInside>
   );
-}
+};

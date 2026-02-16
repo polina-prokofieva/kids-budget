@@ -1,4 +1,4 @@
-import { FormError } from "@ui/form/error/FormError";
+import { FormError } from '@ui/form/error/FormError';
 
 type FieldWrapperProps = {
   fieldName: string;
@@ -13,14 +13,11 @@ export const FieldWrapper = ({
   label,
   isError = false,
   errorMessage,
-  children
-}: FieldWrapperProps
-) => {
+  children,
+}: FieldWrapperProps) => {
   return (
     <>
-      {label && (
-        <label htmlFor={fieldName}>{label}</label>
-      )}
+      {label && <label htmlFor={fieldName}>{label}</label>}
       {children}
       {isError && errorMessage && (
         <FormError>{errorMessage}</FormError>

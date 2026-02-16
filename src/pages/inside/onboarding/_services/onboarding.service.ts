@@ -1,8 +1,15 @@
-import { auth, db } from "@fb/firebase";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
-import type { OnboardingValues } from "../_types/form";
+import { auth, db } from '@fb/firebase';
+import {
+  doc,
+  serverTimestamp,
+  setDoc,
+} from 'firebase/firestore';
 
-export async function saveOnboarding(values: OnboardingValues) {
+import type { OnboardingValues } from '../_types/form';
+
+export async function saveOnboarding(
+  values: OnboardingValues,
+) {
   const user = auth.currentUser;
 
   if (!user) throw new Error('No authenticate user');
@@ -17,6 +24,6 @@ export async function saveOnboarding(values: OnboardingValues) {
       updatedAt: serverTimestamp(),
       createdAt: serverTimestamp(),
     },
-    { merge: true }
+    { merge: true },
   );
 }

@@ -1,8 +1,8 @@
-import type { UseFormRegisterReturn } from "react-hook-form";
+import type { UseFormRegisterReturn } from 'react-hook-form';
+import type { CurrencyCode } from '@t/currency';
+import { getCurrencySymbol } from '@utils/currency';
 
 import styles from './MoneyField.module.less';
-import type { CurrencyCode } from "@t/currency";
-import { getCurrencySymbol } from "@utils/currency";
 
 type MoneyFieldProps = {
   name: string;
@@ -13,7 +13,7 @@ type MoneyFieldProps = {
 export const MoneyField = ({
   name,
   currency,
-  registerField
+  registerField,
 }: MoneyFieldProps) => {
   return (
     <div className={styles.MoneyField}>
@@ -23,10 +23,10 @@ export const MoneyField = ({
       <input
         id={name}
         className={styles.amountField}
-        type="number"
-        placeholder="0.00"
+        type='number'
+        placeholder='0.00'
         {...registerField}
       />
     </div>
   );
-}
+};

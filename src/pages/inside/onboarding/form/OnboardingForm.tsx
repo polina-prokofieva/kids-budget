@@ -1,12 +1,13 @@
-import { useMemo, useState } from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { useMemo, useState } from 'react';
+import {
+  type SubmitHandler,
+  useForm,
+} from 'react-hook-form';
 
-
-
-import styles from "./OnboardingForm.module.less";
-import { ONBOARDING_STEPS } from "../_consts/steps";
-import type { OnboardingValues } from "../_types/form";
-import { saveOnboarding } from "../_services/onboarding.service";
+import { ONBOARDING_STEPS } from '../_consts/steps';
+import { saveOnboarding } from '../_services/onboarding.service';
+import type { OnboardingValues } from '../_types/form';
+import styles from './OnboardingForm.module.less';
 
 export const OnboardingForm = () => {
   const {
@@ -18,7 +19,8 @@ export const OnboardingForm = () => {
   } = useForm<OnboardingValues>();
 
   const [step, setStep] = useState<number>(0);
-  const [isNextDisabled, setIsNextDisabled] = useState<boolean>(false);
+  const [isNextDisabled, setIsNextDisabled] =
+    useState<boolean>(false);
 
   const StepComponent = ONBOARDING_STEPS[step].component;
   const currenctFieldName = ONBOARDING_STEPS[step].name;
@@ -31,19 +33,22 @@ export const OnboardingForm = () => {
       setIsNextDisabled(false);
     }
 
-    if (!isValid)
-      setIsNextDisabled(true);
-  }
+    if (!isValid) setIsNextDisabled(true);
+  };
 
   const goToPreviousStep = () => {
-    if (step > 0)
-      setStep((s) => s - 1);
-  }
+    if (step > 0) setStep((s) => s - 1);
+  };
 
   const isFirst = useMemo(() => step === 0, [step]);
-  const isLast = useMemo(() => step === ONBOARDING_STEPS.length - 1, [step]);
+  const isLast = useMemo(
+    () => step === ONBOARDING_STEPS.length - 1,
+    [step],
+  );
 
-  const submit: SubmitHandler<OnboardingValues> = async (values: OnboardingValues) => {
+  const submit: SubmitHandler<OnboardingValues> = async (
+    values: OnboardingValues,
+  ) => {
     saveOnboarding(values);
   };
   return (
@@ -56,20 +61,26 @@ export const OnboardingForm = () => {
       />
 
       <p className={styles.buttons}>
-        {!isFirst && <button
-          type="button"
-          onClick={goToPreviousStep}
-        >
-          Back
-        </button>}
+        {!isFirst && (
+          <button
+            type='button'
+            onClick={goToPreviousStep}
+          >
+            Back
+          </button>
+        )}
 
-        {isLast ? <button type="submit">Save</button> : <button
-          type="button"
-          onClick={goToNextStep}
-          disabled={isNextDisabled}
-        >
-          Next
-        </button>}
+        {isLast ? (
+          <button type='submit'>Save</button>
+        ) : (
+          <button
+            type='button'
+            onClick={goToNextStep}
+            disabled={isNextDisabled}
+          >
+            Next
+          </button>
+        )}
       </p>
     </form>
   );

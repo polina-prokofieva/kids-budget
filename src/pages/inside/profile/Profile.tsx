@@ -1,12 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { Loader } from '@components/loader/Loader';
+import { auth } from '@fb/firebase';
 import { skipToken } from '@reduxjs/toolkit/query';
+import { useGetUserDocQuery } from '@store/api/user';
 
-import { auth } from "@fb/firebase";
-
-import { LayoutInside } from "../_layout/LayoutInside";
-import { Loader } from "@components/loader/Loader";
-import { useGetUserDocQuery } from "@store/api/user";
-
+import { LayoutInside } from '../_layout/LayoutInside';
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -20,20 +18,18 @@ export default function Profile() {
   } = useGetUserDocQuery(firebaseUser?.uid ?? skipToken);
 
   if (!firebaseUser) {
-    navigate("/signin");
+    navigate('/signin');
     return;
   }
 
   if (!isLoading && !userDoc?.onboardingCompleted) {
-    navigate("/onboarding");
+    navigate('/onboarding');
   }
 
-  console.log('userDoc', userDoc);
-
-  if (isLoading) return <Loader />
+  if (isLoading) return <Loader />;
 
   return (
-    <LayoutInside title="Profile">
+    <LayoutInside title='Profile'>
       <section>
         <p>Name: {firebaseUser.displayName}</p>
         <p>Email: {firebaseUser.email}</p>
@@ -42,11 +38,15 @@ export default function Profile() {
           <>
             <hr />
             <p>Currency: {userDoc.currency}</p>
-            <p>Starting balance: {userDoc.startingBalance}</p>
+            <p>
+              Starting balance: {userDoc.startingBalance}
+            </p>
           </>
         )}
 
-        <button onClick={() => auth.signOut()}>Sign out</button>
+        <button onClick={() => auth.signOut()}>
+          Sign out
+        </button>
       </section>
     </LayoutInside>
   );

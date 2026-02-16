@@ -1,9 +1,9 @@
-import { baseApi } from './base';
-import { doc, getDoc } from 'firebase/firestore';
-import type { FirebaseError } from 'firebase/app';
-
 import { db } from '@fb/firebase';
 import type { UserDoc } from '@t/users';
+import type { FirebaseError } from 'firebase/app';
+import { doc, getDoc } from 'firebase/firestore';
+
+import { baseApi } from './base';
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -13,10 +13,14 @@ export const userApi = baseApi.injectEndpoints({
           const snap = await getDoc(doc(db, 'users', uid));
 
           if (!snap.exists()) {
-            return { error: { message: 'User document docs not exist' } }
+            return {
+              error: {
+                message: 'User document docs not exist',
+              },
+            };
           }
 
-          return { data: snap.data() as UserDoc }
+          return { data: snap.data() as UserDoc };
         } catch (error) {
           const firebaseError = error as FirebaseError;
 
@@ -24,10 +28,10 @@ export const userApi = baseApi.injectEndpoints({
             error: {
               message: firebaseError.message,
               code: firebaseError.code,
-            }
-          }
+            },
+          };
         }
-      }
+      },
     }),
   }),
 });
