@@ -1,7 +1,13 @@
-import { db } from '@fb/firebase';
+import { auth, db } from '@fb/firebase';
+import type { OnboardingValues } from '@pages/inside/onboarding/_types/form';
 import type { UserDoc } from '@t/users';
 import type { FirebaseError } from 'firebase/app';
-import { doc, getDoc } from 'firebase/firestore';
+import {
+  doc,
+  getDoc,
+  serverTimestamp,
+  setDoc,
+} from 'firebase/firestore';
 
 import { baseApi } from './base';
 
@@ -33,7 +39,51 @@ export const userApi = baseApi.injectEndpoints({
         }
       },
     }),
+
+    setUserDoc: builder.mutation<
+      OnboardingValues,
+      OnboardingValues
+    >({
+      async queryFn(values: OnboardingValues) {
+        try {
+          const user = auth.currentUser;
+
+          if (!user)
+            return {
+              error: {
+                message: 'No authenticate user',
+              },
+            };
+
+          const ref = doc(db, 'users', user.uid);
+
+          await setDoc(
+            ref,
+            {
+              ...values,
+              startingBalance: values.totalAmount,
+              onboardingCompleted: true,
+              updatedAt: serverTimestamp(),
+              createdAt: serverTimestamp(),
+            },
+            { merge: true },
+          );
+
+          return { data: values };
+        } catch (error) {
+          const firebaseError = error as FirebaseError;
+
+          return {
+            error: {
+              message: firebaseError.message,
+              code: firebaseError.code,
+            },
+          };
+        }
+      },
+    }),
   }),
 });
 
-export const { useGetUserDocQuery } = userApi;
+export const { useGetUserDocQuery, useSetUserDocMutation } =
+  userApi;

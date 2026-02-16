@@ -3,9 +3,9 @@ import {
   type SubmitHandler,
   useForm,
 } from 'react-hook-form';
+import { useSetUserDocMutation } from '@store/api/user';
 
 import { ONBOARDING_STEPS } from '../_consts/steps';
-import { saveOnboarding } from '../_services/onboarding.service';
 import type { OnboardingValues } from '../_types/form';
 import styles from './OnboardingForm.module.less';
 
@@ -17,6 +17,9 @@ export const OnboardingForm = () => {
     trigger,
     formState: { errors },
   } = useForm<OnboardingValues>();
+
+  const [setUserDoc, { isLoading, error }] =
+    useSetUserDocMutation();
 
   const [step, setStep] = useState<number>(0);
   const [isNextDisabled, setIsNextDisabled] =
@@ -49,8 +52,9 @@ export const OnboardingForm = () => {
   const submit: SubmitHandler<OnboardingValues> = async (
     values: OnboardingValues,
   ) => {
-    saveOnboarding(values);
+    await setUserDoc(values);
   };
+
   return (
     <form onSubmit={handleSubmit(submit)}>
       <StepComponent

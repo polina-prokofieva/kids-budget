@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Loader } from '@components/loader/Loader';
 import { auth } from '@fb/firebase';
@@ -18,16 +19,16 @@ export const OnboardingPage = () => {
     isError,
   } = useGetUserDocQuery(firebaseUser?.uid ?? skipToken);
 
-  if (!firebaseUser) {
-    navigate('/signin');
-    return;
-  }
+  useEffect(() => {
+    if (!firebaseUser) {
+      navigate('/signin');
+      return;
+    }
 
-  if (!isLoading && userDoc?.onboardingCompleted) {
-    navigate('/profile');
-  }
-
-  console.log('userDoc', userDoc);
+    if (!isLoading && userDoc?.onboardingCompleted) {
+      navigate('/profile');
+    }
+  }, [firebaseUser, userDoc, isLoading, navigate]);
 
   if (isLoading) return <Loader />;
 
