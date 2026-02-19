@@ -2,11 +2,11 @@ import { CURRENCIES } from '@consts/currencies';
 import type { OnboardingStepComponentProps } from '@pages/inside/onboarding/_types/form';
 import { FieldWrapper } from '@ui/form/fields/wrapper/FieldWrapper';
 
-export const Currency = ({
+export default function Currency({
   name,
   register,
   errors,
-}: OnboardingStepComponentProps) => {
+}: OnboardingStepComponentProps) {
   return (
     <FieldWrapper
       fieldName={name}
@@ -33,4 +33,4 @@ export const Currency = ({
       </select>
     </FieldWrapper>
   );
-};
+}

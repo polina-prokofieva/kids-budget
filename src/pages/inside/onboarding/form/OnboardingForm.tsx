@@ -9,7 +9,7 @@ import { ONBOARDING_STEPS } from '../_consts/steps';
 import type { OnboardingValues } from '../_types/form';
 import styles from './OnboardingForm.module.less';
 
-export const OnboardingForm = () => {
+export default function OnboardingForm() {
   const {
     register,
     watch,
@@ -88,4 +88,4 @@ export const OnboardingForm = () => {
       </p>
     </form>
   );
-};
+}

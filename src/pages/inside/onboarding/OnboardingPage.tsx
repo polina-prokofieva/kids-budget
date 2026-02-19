@@ -6,9 +6,9 @@ import { skipToken } from '@reduxjs/toolkit/query';
 import { useGetUserDocQuery } from '@store/api/user';
 
 import { LayoutInside } from '../_layout/LayoutInside';
-import { OnboardingForm } from './form/OnboardingForm';
+import OnboardingForm from './form/OnboardingForm';
 
-export const OnboardingPage = () => {
+export default function OnboardingPage() {
   const navigate = useNavigate();
 
   const firebaseUser = auth.currentUser;
@@ -37,4 +37,4 @@ export const OnboardingPage = () => {
       <OnboardingForm />
     </LayoutInside>
   );
-};
+}

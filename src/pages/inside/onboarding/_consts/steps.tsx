@@ -4,11 +4,9 @@ import type {
   OnboardingStepComponentProps,
   OnboardingValues,
 } from '../_types/form';
-import {
-  Currency,
-  MonthlyIncome,
-  TotalAmount,
-} from '../form/steps';
+import Currency from '../form/steps/currency/Currency';
+import MonthlyIncome from '../form/steps/monthly-income/MonthlyIncome';
+import TotalAmount from '../form/steps/total/TotalAmount';
 
 type StepComponent = (
   props: OnboardingStepComponentProps,

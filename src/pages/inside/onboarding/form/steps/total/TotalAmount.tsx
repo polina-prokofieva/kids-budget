@@ -2,12 +2,12 @@ import type { OnboardingStepComponentProps } from '@pages/inside/onboarding/_typ
 import { FormError } from '@ui/form/error/FormError';
 import { MoneyField } from '@ui/form/fields/money/MoneyField';
 
-export const TotalAmount = ({
+export default function TotalAmount({
   name,
   register,
   watch,
   errors,
-}: OnboardingStepComponentProps) => {
+}: OnboardingStepComponentProps) {
   const selectedCurrency = watch('currency');
 
   return (
@@ -27,4 +27,4 @@ export const TotalAmount = ({
       )}
     </>
   );
-};
+}

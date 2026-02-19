@@ -1,5 +1,5 @@
 import { Navigate, Route } from 'react-router-dom';
-import { OnboardingPage } from '@pages/inside/onboarding/OnboardingPage';
+import OnboardingPage from '@pages/inside/onboarding/OnboardingPage';
 import Profile from '@pages/inside/profile/Profile';
 
 export default function InsideRoutes() {
