@@ -22,6 +22,7 @@ export default defineConfig({
       '@pages': '/src/pages',
       '@fb': '/src/firebase',
       '@store': '/src/store',
+      '@router': '/src/router',
 
       '@inside': '/src/pages/inside',
       '@outside': '/src/pages/outside',

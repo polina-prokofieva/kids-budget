@@ -1,4 +1,3 @@
-import { Routes } from 'react-router-dom';
 import type { User } from 'firebase/auth';
 
 import InsideRoutes from './InsideRoutes';
@@ -9,9 +8,5 @@ export default function AppRoutes({
 }: {
   user: User | null;
 }) {
-  return (
-    <Routes>
-      {!user ? <OutsideRoutes /> : <InsideRoutes />}
-    </Routes>
-  );
+  return !user ? <OutsideRoutes /> : <InsideRoutes />;
 }

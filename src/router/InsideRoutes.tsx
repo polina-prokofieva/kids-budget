@@ -1,10 +1,10 @@
-import { Navigate, Route } from 'react-router-dom';
-import OnboardingPage from '@pages/inside/onboarding/OnboardingPage';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import OnboardingPage from '@inside/onboarding/OnboardingPage';
 import Profile from '@pages/inside/profile/Profile';
 
 export default function InsideRoutes() {
   return (
-    <>
+    <Routes>
       <Route
         path='/profile'
         element={<Profile />}
@@ -17,6 +17,6 @@ export default function InsideRoutes() {
         path='*'
         element={<Navigate to='/profile' />}
       />
-    </>
+    </Routes>
   );
 }

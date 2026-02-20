@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from '@router/AppRoutes';
 import type { User } from 'firebase/auth';
 import { onAuthStateChanged } from 'firebase/auth';
-import AppRoutes from 'router/AppRoutes';
 
 import { Loader } from './_components/loader/Loader';
 import { auth } from './firebase/firebase';

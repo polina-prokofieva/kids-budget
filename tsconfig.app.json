@@ -34,6 +34,7 @@
       "@pages/*": ["pages/*"],
       "@fb/*": ["firebase/*"],
       "@store/*": ["store/*"],
+      "@router/*": ["router/*"],
       
       "@inside/*": ["pages/inside/*"],
       "@outside/*": ["pages/outside/*"]
