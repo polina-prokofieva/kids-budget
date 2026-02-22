@@ -81,6 +81,23 @@ export const userApi = baseApi.injectEndpoints({
           };
         }
       },
+      async onQueryStarted(
+        values,
+        { dispatch, queryFulfilled },
+      ) {
+        await queryFulfilled;
+
+        const uid = auth.currentUser?.uid;
+        if (!uid) return;
+
+        dispatch(
+          userApi.util.upsertQueryData('getUserDoc', uid, {
+            ...values,
+            startingBalance: values.totalAmount,
+            onboardingCompleted: true,
+          }),
+        );
+      },
     }),
   }),
 });
