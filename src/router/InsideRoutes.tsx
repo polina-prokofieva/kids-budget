@@ -3,6 +3,7 @@ import { Loader } from '@components/loader/Loader';
 import { auth } from '@fb/firebase';
 import OnboardingPage from '@inside/onboarding/OnboardingPage';
 import Profile from '@inside/profile/Profile';
+import { Settings } from '@pages/inside/settings/Settings';
 import { skipToken } from '@reduxjs/toolkit/query';
 import { useGetUserDocQuery } from '@store/api/user';
 
@@ -24,6 +25,10 @@ export default function InsideRoutes() {
         <Route
           path='/profile'
           element={<Profile />}
+        />
+        <Route
+          path='/settings'
+          element={<Settings />}
         />
         <Route
           path='*'
