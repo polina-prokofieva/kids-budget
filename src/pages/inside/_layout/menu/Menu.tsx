@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { TOP_MENU } from './_menu';
 import styles from './Menu.module.less';
 
@@ -7,7 +9,7 @@ export const Menu = () => {
       <ul>
         {TOP_MENU.map(({ label, path }) => (
           <li key={label}>
-            <a href={path}>{label}</a>
+            <Link to={path}>{label}</Link>
           </li>
         ))}
       </ul>
