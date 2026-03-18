@@ -1,3 +1,3 @@
 import type { Category } from "./categories";
 
-export type CategoryForm = Omit<Category, "id">;
+export type CategoryFormValues = Omit<Category, "id" | "start" | "end">;
