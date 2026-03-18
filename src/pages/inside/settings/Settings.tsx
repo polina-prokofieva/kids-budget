@@ -1,10 +1,11 @@
 import { LayoutInside } from "../_layout/LayoutInside";
+import { IncomeCategories } from "./categories/income/IncomeCategories";
 
 export const Settings = () => {
   return (
     <LayoutInside title='Settings'>
       <section>
-        Here will be the Settings page
+        <IncomeCategories />
       </section>
     </LayoutInside>
   );
