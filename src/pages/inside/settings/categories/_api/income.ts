@@ -1,19 +1,65 @@
 import { db } from '@fb/firebase';
 import { baseApi } from '@store/api/base';
+import type { FirebaseError } from 'firebase/app';
 import {
   addDoc,
   collection,
+  getDocs,
   serverTimestamp,
 } from 'firebase/firestore';
 
+import type { Category } from '../_types/categories';
+
 export const incomeCategoryApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getIncomeCategories: builder.query({
+      async queryFn(uid) {
+        try {
+          console.log('uid', uid);
+
+          const snap = await getDocs(
+            collection(
+              db,
+              'users',
+              uid,
+              'incomeCategories',
+            ),
+          );
+
+          const data = snap.docs.map((doc) => {
+            const category = doc.data();
+
+            return {
+              id: doc.id,
+              ...category,
+              createdAt:
+                category.createdAt
+                  ?.toDate()
+                  .toISOString() ?? null,
+              updatedAt:
+                category.updatedAt
+                  ?.toDate()
+                  .toISOString() ?? null,
+            };
+          }) as Category[];
+
+          return { data };
+        } catch (error) {
+          const firebaseError = error as FirebaseError;
+
+          return {
+            error: {
+              message: firebaseError.message,
+              code: firebaseError.code,
+            },
+          };
+        }
+      },
+    }),
+
     createIncomeCategory: builder.mutation({
       async queryFn({ uid, data }) {
         try {
-          console.log('uid', uid);
-          console.log('data', data);
-
           const collectionRef = collection(
             db,
             'users',
@@ -31,7 +77,6 @@ export const incomeCategoryApi = baseApi.injectEndpoints({
 
           return { data: { id: docRef.id, ...data } };
         } catch (error) {
-
           console.log('error', error);
 
           return {
@@ -50,4 +95,7 @@ export const incomeCategoryApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateIncomeCategoryMutation } = incomeCategoryApi;
+export const {
+  useCreateIncomeCategoryMutation,
+  useGetIncomeCategoriesQuery,
+} = incomeCategoryApi;

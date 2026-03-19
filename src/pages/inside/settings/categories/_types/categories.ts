@@ -5,4 +5,7 @@ export type Category = {
   // color: string;
   // start: Date;
   // end: Date;
+
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
