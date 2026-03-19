@@ -26,7 +26,19 @@ export const userApi = baseApi.injectEndpoints({
             };
           }
 
-          return { data: snap.data() as UserDoc };
+          const data = snap.data();
+
+          return {
+            data: {
+              ...data,
+              createdAt:
+                data.createdAt?.toDate().toISOString() ??
+                null,
+              updatedAt:
+                data.updatedAt?.toDate().toISOString() ??
+                null,
+            } as UserDoc,
+          };
         } catch (error) {
           const firebaseError = error as FirebaseError;
 
