@@ -3,6 +3,7 @@ import { skipToken } from '@reduxjs/toolkit/query';
 
 import { useGetIncomeCategoriesQuery } from '../../_api/income';
 import { CategoryItem } from '../../item/CategoryItem';
+import styles from './CategoryList.module.less';
 
 export const CategoryList = () => {
   const firebaseUser = auth.currentUser;
@@ -18,7 +19,7 @@ export const CategoryList = () => {
   if (!data) return null;
 
   return (
-    <ul>
+    <ul className={styles.CategoryList}>
       {data.map((category) => (
         <CategoryItem
           key={category.id}

@@ -8,8 +8,8 @@ export const CategoryItem = ({
 }: Category) => {
   return (
     <li className={styles.CategoryItem}>
-      {name}
-      {description}
+      <div className={styles.name}>{name}</div>
+      <div className={styles.description}>{description}</div>
     </li>
   );
 };
