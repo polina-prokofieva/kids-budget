@@ -1,16 +1,21 @@
 import { useState } from 'react';
 
 import { CategoryForm } from './form/CategoryForm';
+import styles from './IncomeCategories.module.less';
+import { CategoryList } from './list/CategoryList';
 
 export const IncomeCategories = () => {
   const [isFormOpened, setIsFormOpened] = useState(false);
 
   return (
-    <div>
+    <div className={styles.IncomeCategories}>
       {!isFormOpened && (
-        <button onClick={() => setIsFormOpened(true)}>
-          Add new category
-        </button>
+        <div className={styles.list}>
+          <CategoryList />
+          <button onClick={() => setIsFormOpened(true)}>
+            Add new category
+          </button>
+        </div>
       )}
 
       {isFormOpened && <CategoryForm />}

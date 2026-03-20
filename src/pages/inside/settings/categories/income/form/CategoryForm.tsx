@@ -2,8 +2,8 @@ import {
   type SubmitHandler,
   useForm,
 } from 'react-hook-form';
+import { auth } from '@fb/firebase';
 import { FormError } from '@ui/form/error/FormError';
-import { getAuth } from 'firebase/auth';
 
 import { useCreateIncomeCategoryMutation } from '../../_api/income';
 import type { CategoryFormValues } from '../../_types/form';
@@ -18,9 +18,8 @@ export const CategoryForm = () => {
   const [createIncomeCategory, { isLoading, error }] =
     useCreateIncomeCategoryMutation();
 
-  const auth = getAuth();
-  const user = auth.currentUser;
-  const uid = user?.uid;
+  const firebaseUser = auth.currentUser;
+  const uid = firebaseUser?.uid;
 
   const submit: SubmitHandler<CategoryFormValues> = async (
     values: CategoryFormValues,
