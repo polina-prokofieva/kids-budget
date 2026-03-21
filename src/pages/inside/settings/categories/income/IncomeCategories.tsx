@@ -11,10 +11,10 @@ export const IncomeCategories = () => {
     <div className={styles.IncomeCategories}>
       {!isFormOpened && (
         <div className={styles.list}>
-          <CategoryList />
           <button onClick={() => setIsFormOpened(true)}>
             Add new category
           </button>
+          <CategoryList />
         </div>
       )}
 

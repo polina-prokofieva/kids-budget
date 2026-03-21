@@ -1,9 +1,12 @@
 import { db } from '@fb/firebase';
 import { baseApi } from '@store/api/base';
+import { TAGS } from '@store/tags';
 import type { FirebaseError } from 'firebase/app';
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   getDocs,
   serverTimestamp,
 } from 'firebase/firestore';
@@ -55,6 +58,7 @@ export const incomeCategoryApi = baseApi.injectEndpoints({
           };
         }
       },
+      providesTags: [TAGS.INCOME_CATEGORIES],
     }),
 
     createIncomeCategory: builder.mutation({
@@ -73,8 +77,6 @@ export const incomeCategoryApi = baseApi.injectEndpoints({
             updatedAt: serverTimestamp(),
           });
 
-          console.log('created doc id', docRef.id);
-
           return { data: { id: docRef.id, ...data } };
         } catch (error) {
           console.log('error', error);
@@ -90,7 +92,35 @@ export const incomeCategoryApi = baseApi.injectEndpoints({
           };
         }
       },
-      // invalidatesTags: ['IncomeCategories'],
+      invalidatesTags: [TAGS.INCOME_CATEGORIES],
+    }),
+
+    deleteIncomeCategory: builder.mutation({
+      async queryFn({ uid, categoryId }) {
+        try {
+          const docRef = doc(
+            db,
+            'users',
+            uid,
+            'incomeCategories',
+            categoryId,
+          );
+
+          await deleteDoc(docRef);
+
+          return { data: undefined };
+        } catch (error) {
+          const firebaseError = error as FirebaseError;
+
+          return {
+            error: {
+              message: firebaseError.message,
+              code: firebaseError.code,
+            },
+          };
+        }
+      },
+      invalidatesTags: [TAGS.INCOME_CATEGORIES],
     }),
   }),
 });
@@ -98,4 +128,5 @@ export const incomeCategoryApi = baseApi.injectEndpoints({
 export const {
   useCreateIncomeCategoryMutation,
   useGetIncomeCategoriesQuery,
+  useDeleteIncomeCategoryMutation,
 } = incomeCategoryApi;

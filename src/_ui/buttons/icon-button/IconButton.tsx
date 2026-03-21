@@ -13,14 +13,20 @@ type Props = {
     Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>
   >;
   type?: ButtonType;
+  action: () => void;
 };
 
-export const IconButton = ({ Icon, type = 'primary' }: Props) => {
+export const IconButton = ({
+  Icon,
+  type = 'primary',
+  action
+}: Props) => {
   return (
     <button
       className={classNames(styles.IconButton, {
         [styles[type]]: !!type,
       })}
+      onClick={action}
     >
       <Icon />
     </button>
