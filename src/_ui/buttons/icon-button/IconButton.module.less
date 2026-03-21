@@ -1,0 +1,43 @@
+@import '../../../_assets/colors.less';
+
+.IconButton {
+  padding: 4px 0;
+
+  background: none;
+  border: none;
+  color: #666;
+  
+  transition: color 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: none;
+  }
+
+  &:active, &:focus, &:focus-visible {
+    border: none;
+    background: none;
+    outline: none;
+  }
+}
+
+.button-mixin(@color) {
+  color: @color;
+
+  &:hover {
+    color: lighten(@color, 30%);
+  }
+
+}
+
+.primary {
+  .button-mixin(@primary-color);
+}
+
+.secondary {
+  .button-mixin(@secondary-color);
+}
+
+.danger {
+  .button-mixin(@error-color);
+}

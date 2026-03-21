@@ -1,4 +1,5 @@
-import { Pencil, Trash2 } from 'lucide-react';
+import { IconButton } from '@ui/buttons/icon-button/IconButton';
+import { Icon, Pencil, Trash2 } from 'lucide-react';
 
 import type { Category } from '../_types/categories';
 import styles from './CategoryItem.module.less';
@@ -17,12 +18,8 @@ export const CategoryItem = ({
       </div>
 
       <div className={styles.actions}>
-        <button className={styles.delete}>
-          <Trash2 />
-        </button>
-        <button className={styles.edit}>
-          <Pencil />
-        </button>
+        <IconButton Icon={Trash2} type="danger" />
+        <IconButton Icon={Pencil} type="secondary" />
       </div>
     </li>
   );
