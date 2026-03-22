@@ -1,18 +1,48 @@
 @import '../../../_assets/colors.less';
 
+.button-mixin(@color) {
+  background: @color;
+  color: @bg-color;
+
+  &:hover {
+    background: lighten(@color, 10%);
+  }
+
+   &:active, &:focus, &:focus-visible {
+    background: darken(@color, 10%);
+   }
+
+   &.alt {
+    background: lighten(@color, 90%);
+    color: @color;
+    border: 3px solid @color;
+
+    &:hover {
+      background: none;
+      color: lighten(@color, 10%);
+      border-color: lighten(@color, 10%);
+    }
+
+    &:active, &:focus, &:focus-visible {
+      background: none;
+      color: darken(@color, 10%);
+    }
+   }
+}
+
 .Button {
   color: @bg-color;
   outline: none;
 
   &.primary {
-    background-color: @primary-color;
+    .button-mixin(@primary-color);
   }
 
   &.secondary {
-    background-color: @secondary-color;
+    .button-mixin(@secondary-color);
   }
 
   &.danger {
-    background-color: @error-color;
+    .button-mixin(@error-color);
   }
 }

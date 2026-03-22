@@ -5,6 +5,7 @@ import styles from './Button.module.less';
 
 export const Button = ({
   appearance = 'primary',
+  variant,
   children,
   ...buttonProps
 }: ButtonProps) => {
@@ -12,6 +13,7 @@ export const Button = ({
     <button
       className={classNames(styles.Button, {
         [styles[appearance]]: !!appearance,
+        [styles[variant || '']]: !!variant,
       })}
       {...buttonProps}
     >

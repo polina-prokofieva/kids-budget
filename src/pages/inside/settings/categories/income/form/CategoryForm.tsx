@@ -57,7 +57,7 @@ export const CategoryForm = ({
         <Button
           type='button'
           onClick={closeForm}
-          appearance='secondary'
+          variant='alt'
         >
           Cancel
         </Button>
