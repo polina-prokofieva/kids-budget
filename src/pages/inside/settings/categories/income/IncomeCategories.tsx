@@ -7,18 +7,22 @@ import { CategoryList } from './list/CategoryList';
 export const IncomeCategories = () => {
   const [isFormOpened, setIsFormOpened] = useState(false);
 
+  const closeForm = () => {
+    setIsFormOpened(false);
+  };
+
   return (
     <div className={styles.IncomeCategories}>
-      {!isFormOpened && (
-        <div className={styles.list}>
+      <div className={styles.list}>
+        {!isFormOpened && (
           <button onClick={() => setIsFormOpened(true)}>
             Add new category
           </button>
-          <CategoryList />
-        </div>
-      )}
+        )}
+        <CategoryList />
+      </div>
 
-      {isFormOpened && <CategoryForm />}
+      {isFormOpened && <CategoryForm closeForm={closeForm} />}
     </div>
   );
 };

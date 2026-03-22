@@ -7,8 +7,13 @@ import { FormError } from '@ui/form/error/FormError';
 
 import { useCreateIncomeCategoryMutation } from '../../_api/income';
 import type { CategoryFormValues } from '../../_types/form';
+import styles from './CategoryForm.module.less';
 
-export const CategoryForm = () => {
+export const CategoryForm = ({
+  closeForm,
+}: {
+  closeForm: () => void;
+}) => {
   const {
     register,
     handleSubmit,
@@ -28,7 +33,10 @@ export const CategoryForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <form
+      onSubmit={handleSubmit(submit)}
+      className={styles.CategoryForm}
+    >
       <input
         type='text'
         placeholder='Category name'
@@ -44,7 +52,15 @@ export const CategoryForm = () => {
         {...register('description')}
       />
 
-      <button type='submit'>Add</button>
+      <div className={styles.actions}>
+        <button
+          type='button'
+          onClick={closeForm}
+        >
+          Cancel
+        </button>
+        <button type='submit'>Add</button>
+      </div>
     </form>
   );
 };
