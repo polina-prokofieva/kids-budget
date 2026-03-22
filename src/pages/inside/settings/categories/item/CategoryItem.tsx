@@ -32,13 +32,13 @@ export const CategoryItem = ({
       <div className={styles.actions}>
         <IconButton
           Icon={Trash2}
-          type='danger'
-          action={deleteCategory}
+          appearance='danger'
+          onClick={deleteCategory}
         />
         <IconButton
           Icon={Pencil}
-          type='secondary'
-          action={() => {}}
+          appearance='secondary'
+          onClick={() => {}}
         />
       </div>
     </li>

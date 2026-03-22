@@ -3,6 +3,7 @@ import {
   useForm,
 } from 'react-hook-form';
 import { auth } from '@fb/firebase';
+import { Button } from '@ui/buttons/button/Button';
 import { FormError } from '@ui/form/error/FormError';
 
 import { useCreateIncomeCategoryMutation } from '../../_api/income';
@@ -53,13 +54,14 @@ export const CategoryForm = ({
       />
 
       <div className={styles.actions}>
-        <button
+        <Button
           type='button'
           onClick={closeForm}
+          appearance='secondary'
         >
           Cancel
-        </button>
-        <button type='submit'>Add</button>
+        </Button>
+        <Button type='submit'>Add</Button>
       </div>
     </form>
   );

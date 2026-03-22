@@ -69,6 +69,10 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
   transition: background-color 0.2s ease-in-out;
+
+  &:active, &:focus, &:focus-visible {
+    outline: none;
+  }
 }
 button:hover {
   background-color: lighten(@secondary-color, 10%);

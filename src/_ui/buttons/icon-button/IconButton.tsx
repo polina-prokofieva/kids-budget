@@ -5,28 +5,26 @@ import type {
 import classNames from 'classnames';
 import type { LucideProps } from 'lucide-react';
 
-import type { ButtonType } from '../consts';
+import type { ButtonProps } from '../consts';
 import styles from './IconButton.module.less';
 
-type Props = {
+type Props = ButtonProps & {
   Icon: ForwardRefExoticComponent<
     Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>
   >;
-  type?: ButtonType;
-  action: () => void;
 };
 
 export const IconButton = ({
   Icon,
-  type = 'primary',
-  action
+  appearance = 'primary',
+  onClick,
 }: Props) => {
   return (
     <button
       className={classNames(styles.IconButton, {
-        [styles[type]]: !!type,
+        [styles[appearance]]: !!appearance,
       })}
-      onClick={action}
+      onClick={onClick}
     >
       <Icon />
     </button>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from '@ui/buttons/button/Button';
 
 import { CategoryForm } from './form/CategoryForm';
 import styles from './IncomeCategories.module.less';
@@ -15,9 +16,9 @@ export const IncomeCategories = () => {
     <div className={styles.IncomeCategories}>
       <div className={styles.list}>
         {!isFormOpened && (
-          <button onClick={() => setIsFormOpened(true)}>
+          <Button onClick={() => setIsFormOpened(true)}>
             Add new category
-          </button>
+          </Button>
         )}
         <CategoryList />
       </div>
